@@ -7,22 +7,72 @@ import Img2 from '../images/h2.jpeg';
 import Img3 from '../images/h3.jpeg';
 import Img4 from '../images/h4.jpeg';
 import Img5 from '../images/h5.jpeg';
+import AnkuraHomesLogo from '../images/Ankura_Homes.png';
+import Interior1 from '../images/interior1.png';
+import Interior2 from '../images/interior2.png';
+import Interior3 from '../images/interior3.png';
+import Plan1 from '../images/plan1.png';
+import Plan2 from '../images/plan2.png';
+import Footer from './Footer';
+import Header from './Header';
+import FloatingWhatsApp from './FloatingWhatsApp';
+// Modal component removed; details are URL-driven
 
 export default function Projects() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalData, setModalData] = useState({ title: '', img: '', description: '', status: '' });
+  const [detailId, setDetailId] = useState(null);
 
-  const openModal = (data) => {
-    setModalData(data);
-    setModalOpen(true);
-    document.body.classList.add('modal-open');
+  const PROJECTS_DATA = {
+    '1': {
+      title: 'Premium Residence — 4 BHK Villa, Hayathnagar',
+      img: Img1,
+      description: 'Spacious 4 BHK independent villa featuring a double‑height living room, Vaastu‑aligned planning, premium finishes, and dedicated car parking.',
+      status: 'Completed',
+      info: [
+        '4 BHK independent villa in Hayathnagar',
+        'Double‑height living room with abundant daylight',
+        'Vaastu‑aligned planning and efficient layouts',
+        'Premium materials and meticulous detailing',
+        'Dedicated car parking within the premises',
+        'Landscaped surroundings and serene neighborhood'
+      ],
+      logos: [],
+      interior: [
+        { src: Interior2, caption: 'Bedroom — calm interiors with ample storage' },
+        { src: Interior3, caption: 'Kitchen — modular design with functional workflow' }
+      ],
+      plans: [
+        { src: Plan1, caption: 'Site plan — integrated private parking within villa plot' },
+        { src: Plan2, caption: 'Parking Plan' }
+      ]
+    },
+    '2': {
+      title: 'Ankura Homes — 2 BHK Luxury Apartments @ Hayathnagar',
+      img: Img2,
+      description: 'Exclusive 2 BHK apartments designed for comfort and privacy with modern amenities and dedicated car parking in a well-connected location.',
+      // status: 'Completed',
+      info: [
+        '2 BHK Apartments · Hayathnagar',
+        'Modern amenities with premium finishes',
+        'No common walls for enhanced privacy',
+        'Vaastu‑aligned planning and efficient layouts',
+        'Dedicated car parking and secure premises',
+        'Well‑connected location near daily conveniences'
+      ],
+      logos: [
+        { src: AnkuraHomesLogo, caption: 'Ankura Homes — Project mark' }
+      ],
+      interior: [
+        { src: Interior2, caption: 'Master bedroom — functional design with ample storage' },
+        { src: Interior3, caption: 'Modular kitchen — efficient workspace with modern fittings' }
+      ],
+      plans: [
+        { src: Plan1, caption: 'Typical floor plan — optimized 2 BHK layout' },
+        { src: Plan2, caption: 'Parking Plan' }
+      ]
+    },
   };
 
-  const closeModal = () => {
-    setModalOpen(false);
-    setModalData({ title: '', img: '', description: '', status: '' });
-    document.body.classList.remove('modal-open');
-  };
+  // Modal removed; navigation is handled via URL hash params
   useEffect(() => {
     const handleScroll = () => {
       const navbar = document.querySelector('.navbar');
@@ -34,68 +84,108 @@ export default function Projects() {
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Parse detail id from hash query (?detail=1)
+  useEffect(() => {
+    const readDetailFromHash = () => {
+      const hash = window.location.hash || '';
+      const qIndex = hash.indexOf('?');
+      if (qIndex === -1) { setDetailId(null); return; }
+      const qs = hash.substring(qIndex + 1);
+      const params = new URLSearchParams(qs);
+      const id = params.get('detail');
+      setDetailId(id);
+    };
+    window.addEventListener('hashchange', readDetailFromHash);
+    readDetailFromHash();
+    return () => window.removeEventListener('hashchange', readDetailFromHash);
+  }, []);
+  // Detail page view
+  if (detailId && PROJECTS_DATA[detailId]) {
+    const d = PROJECTS_DATA[detailId];
+    return (
+      <>
+        <Header active="projects" />
+        <section className="page-header">
+          <div className="container">
+            <h1>Project Details</h1>
+            <nav aria-label="breadcrumb">
+              <ol className="breadcrumb">
+                <li className="breadcrumb-item"><a href="#/">Home</a></li>
+                <li className="breadcrumb-item"><a href="#/projects">Projects</a></li>
+                <li className="breadcrumb-item active">Details</li>
+              </ol>
+            </nav>
+          </div>
+        </section>
+        <section className="section">
+          <div className="container">
+            <div className="mb-4 d-flex align-items-center justify-content-between">
+              <div className="d-flex align-items-center gap-3">
+                {!!(d.logos && d.logos.length) && (
+                  <img src={(d.logos[0] && d.logos[0].src) ? d.logos[0].src : d.logos[0]} alt="Project Logo" style={{ height: 72 }} />
+                )}
+                <h1 className="h3 fw-semibold text-dark m-0">{d.title}</h1>
+              </div>
+              <button className="btn btn-outline-secondary" onClick={() => { window.location.hash = '#/projects'; }}>Back</button>
+            </div>
+            <div className="row g-4">
+              <div className="col-lg-6">
+                <img src={d.img} alt={d.title} loading="lazy" className="img-fluid rounded-3 shadow-sm" style={{ width: '100%', aspectRatio: '4 / 3', objectFit: 'cover' }} />
+              </div>
+              <div className="col-lg-6 d-flex">
+                <div className="my-auto">
+                  <p className="mb-2 text-secondary">{d.status && <span className="badge bg-success me-2">{d.status}</span>} {d.description}</p>
+                  {!!(d.info && d.info.length) && (
+                    <ul className="list-unstyled small text-secondary mb-0">
+                      {d.info.map((it, idx) => <li className="mb-1" key={idx}>• {it}</li>)}
+                    </ul>
+                  )}
+                </div>
+              </div>
+            </div>
+            {!!(d.interior && d.interior.length) && (
+              <div className="row g-4 mt-4">
+                <div className="col-12">
+                  <h3 className="h5 fw-semibold text-dark mb-2">Interior Design</h3>
+                </div>
+                {d.interior.slice(0, 2).map((item, idx) => (
+                  <div key={idx} className="col-12 col-md-6">
+                    <figure className="m-0">
+                      <img src={item.src} alt={item.caption || `Interior ${idx + 1}`} loading="lazy" className="img-fluid rounded-3 shadow-sm" style={{ width: '100%', aspectRatio: '16 / 10', objectFit: 'cover' }} />
+                      {item.caption && <figcaption className="small text-muted mt-2">{item.caption}</figcaption>}
+                    </figure>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {!!(d.plans && d.plans.length) && (
+              <div className="row g-4 mt-4">
+                <div className="col-12">
+                  <h3 className="h5 fw-semibold text-dark mb-2">Our Plans</h3>
+                </div>
+                {d.plans.slice(0, 2).map((p, idx) => (
+                  <div key={idx} className="col-12 col-md-6">
+                    <figure className="m-0">
+                      <img src={p.src} alt={p.caption || `Plan ${idx + 1}`} loading="lazy" className="img-fluid rounded-3 shadow-sm" style={{ width: '100%', aspectRatio: '16 / 10', objectFit: 'contain', background: '#fff' }} />
+                      {p.caption && <figcaption className="small text-muted mt-2">{p.caption}</figcaption>}
+                    </figure>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+        <Footer />
+        <FloatingWhatsApp />
+      </>
+    );
+  }
+
   return (
     <>
-      <nav className="navbar navbar-expand-lg">
-        <div className="container">
-          <a className="navbar-brand" href="#/">
-            <img src={Logo} alt="Sri Ankura Developers" style={{ height: '56px' }} />
-            <span className="brand-text">Sri Ankura Developers</span>
-          </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <a className="nav-link" href="#/">
-                  Home
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#/about">
-                  About Us
-                </a>
-              </li>
-              {/* <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle active"
-                  href="#/projects"
-                  id="projectsDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Projects
-                </a>
-                <ul className="dropdown-menu" aria-labelledby="projectsDropdown">
-                  <li>
-                    <a className="dropdown-item" href="#/projects">
-                      Construction Projects
-                    </a>
-                  </li>
-                </ul>
-              </li> */}
-              <li className="nav-item">
-                <a className="nav-link active" href="#/projects">Projects</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#/contact">
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+      <Header active="projects" />
 
       <section className="page-header">
         <div className="container">
@@ -111,48 +201,33 @@ export default function Projects() {
         </div>
       </section>
 
-      {modalOpen && (
-        <>
-          <div className="modal fade show" style={{ display: 'block' }} role="dialog" aria-modal="true">
-            <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: '720px' }}>
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title">{modalData.title}</h5>
-                  <button type="button" className="btn-close" aria-label="Close" onClick={closeModal}></button>
-                </div>
-                <div className="modal-body">
-                  <img
-                    src={modalData.img}
-                    alt={modalData.title}
-                    className="img-fluid rounded mb-3"
-                    style={{ maxWidth: '420px', width: '100%', display: 'block', margin: '0 auto' }}
-                  />
-                  <p className="mb-1">
-                    {modalData.status && (
-                      <span className="badge bg-success me-2">{modalData.status}</span>
-                    )}
-                    {modalData.description}
-                  </p>
-                </div>
-                <div className="modal-footer">
-                  <button type="button" className="btn btn-secondary" onClick={closeModal}>Close</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="modal-backdrop fade show" onClick={closeModal}></div>
-        </>
-      )}
+      {/* Modal removed */}
 
       <section className="section">
         <div className="container">
           <div className="text-center mb-5">
-            <h2 className="section-title">Our Portfolio</h2>
-            <p className="section-subtitle">
-              Explore our projects showcasing quality and innovation
-            </p>
+            <h2 className="section-title display-6 fw-semibold text-dark mb-2">Our Portfolio</h2>
+            <p className="section-subtitle lead text-secondary mb-0">Explore our projects showcasing quality and innovation</p>
           </div>
           <div className="row g-4">
+            <div className="col-lg-4 col-md-6">
+              <div className="project-card" onClick={() => { window.location.hash = '#/projects?detail=2'; }}>
+                <span className="project-details">Completed</span>
+                <img
+                  src={Img2}
+                  alt="Ankura Homes - 2 BHK Luxury Apartments @ Hayathnagar"
+                  role="button"
+                  loading="lazy"
+                  className="img-fluid rounded-3 shadow-sm"
+                  style={{ cursor: 'pointer', width: '100%', aspectRatio: '16 / 9', objectFit: 'cover' }}
+                />
+                <div className="project-overlay">
+                  <h4 className="h5 fw-semibold mb-1">Ankura Homes</h4>
+                  <p className="small mb-0">2 BHK Luxury Apartments @ Hayathnagar</p>
+                </div>
+              </div>
+            </div>
+
             <div className="col-lg-4 col-md-6">
               <div className="project-card">
                 <span className="project-details">Completed</span>
@@ -160,39 +235,13 @@ export default function Projects() {
                   src={Img1}
                   alt="Premium Residence - Hayath Nagar"
                   role="button"
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => openModal({
-                    title: 'Premium Residence - Hayath Nagar',
-                    img: Img1,
-                    description: 'Modern 4BHK independent villa with contemporary elevation',
-                    status: 'Completed'
-                  })}
+                  loading="lazy"
+                  className="img-fluid rounded-3 shadow-sm"
+                  style={{ cursor: 'pointer', width: '100%', aspectRatio: '16 / 9', objectFit: 'cover' }}
                 />
                 <div className="project-overlay">
-                  <h4>Premium Residence - Hayath Nagar</h4>
-                  <p>Modern 4BHK independent villa with contemporary elevation</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-lg-4 col-md-6">
-              <div className="project-card">
-                <span className="project-details">Completed</span>
-                <img
-                  src={Img2}
-                  alt="Residential Complex - Gated Community"
-                  role="button"
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => openModal({
-                    title: 'Residential Complex',
-                    img: Img2,
-                    description: 'Apartment block with landscaped courts and amenities',
-                    status: 'Completed'
-                  })}
-                />
-                <div className="project-overlay">
-                  <h4>Residential Complex</h4>
-                  <p>Apartment block with landscaped courts and amenities</p>
+                  <h4 className="h5 fw-semibold mb-1">Premium Residence</h4>
+                  <p className="small mb-0">4 BHK Independent Villa · Hayathnagar</p>
                 </div>
               </div>
             </div>
@@ -204,17 +253,19 @@ export default function Projects() {
                   src={Img3}
                   alt="Independent House - Custom Design"
                   role="button"
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => openModal({
-                    title: 'Independent House',
-                    img: Img3,
-                    description: 'Custom designed 3BHK home with efficient space planning',
-                    status: 'Completed'
-                  })}
+                  loading="lazy"
+                  className="img-fluid rounded-3 shadow-sm"
+                  style={{ cursor: 'pointer', width: '100%', aspectRatio: '16 / 9', objectFit: 'cover' }}
+                // onClick={() => openModal({
+                //   title: 'Signature Home — Custom 3 BHK Residence',
+                //   img: Img3,
+                //   description: 'Custom 3 BHK residence with airy balconies, excellent cross‑ventilation, efficient space planning, and low‑maintenance materials for long‑term value.',
+                //   status: 'Completed'
+                // })}
                 />
                 <div className="project-overlay">
-                  <h4>Independent House</h4>
-                  <p>Custom designed 3BHK home with efficient space planning</p>
+                  <h4 className="h5 fw-semibold mb-1">Signature Home</h4>
+                  <p className="small mb-0">Custom 3 BHK Residence</p>
                 </div>
               </div>
             </div>
@@ -226,17 +277,19 @@ export default function Projects() {
                   src={Img4}
                   alt="Commercial Tower - Ongoing"
                   role="button"
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => openModal({
-                    title: 'Commercial Tower',
-                    img: Img4,
-                    description: '10-story commercial building in prime location',
-                    status: 'Ongoing'
-                  })}
+                  loading="lazy"
+                  className="img-fluid rounded-3 shadow-sm"
+                  style={{ cursor: 'pointer', width: '100%', aspectRatio: '16 / 9', objectFit: 'cover' }}
+                // onClick={() => openModal({
+                //   title: 'Ankura Arcade — Commercial Tower',
+                //   img: Img4,
+                //   description: 'Ongoing Grade‑A commercial tower with flexible floor plates, ample parking, and modern building services in a prime, well‑connected location.',
+                //   status: 'Ongoing'
+                // })}
                 />
                 <div className="project-overlay">
-                  <h4>Commercial Tower</h4>
-                  <p>10-story commercial building in prime location</p>
+                  <h4 className="h5 fw-semibold mb-1">Ankura Arcade</h4>
+                  <p className="small mb-0">Commercial Tower · Ongoing</p>
                 </div>
               </div>
             </div>
@@ -248,17 +301,19 @@ export default function Projects() {
                   src={Img5}
                   alt="Villa Estate - Luxury Villas"
                   role="button"
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => openModal({
-                    title: 'Villa Estate',
-                    img: Img5,
-                    description: 'Gated community with 20 luxury villas',
-                    status: 'Completed'
-                  })}
+                  loading="lazy"
+                  className="img-fluid rounded-3 shadow-sm"
+                  style={{ cursor: 'pointer', width: '100%', aspectRatio: '16 / 9', objectFit: 'cover' }}
+                // onClick={() => openModal({
+                //   title: 'Green Meadows Villas — Gated Enclave',
+                //   img: Img5,
+                //   description: 'Gated enclave of 20 villas with landscaped avenues, clubhouse, children’s play area, and 24×7 security for a safe, community‑centric lifestyle.',
+                //   status: 'Completed'
+                // })}
                 />
                 <div className="project-overlay">
-                  <h4>Villa Estate</h4>
-                  <p>Gated community with 20 luxury villas</p>
+                  <h4 className="h5 fw-semibold mb-1">Green Meadows Villas</h4>
+                  <p className="small mb-0">20‑Villa Gated Community</p>
                 </div>
               </div>
             </div>
@@ -270,17 +325,19 @@ export default function Projects() {
                   src={Img1}
                   alt="Modern Home - Smart Features"
                   role="button"
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => openModal({
-                    title: 'Modern Home',
-                    img: Img1,
-                    description: 'Contemporary design with smart home features',
-                    status: 'Completed'
-                  })}
+                  loading="lazy"
+                  className="img-fluid rounded-3 shadow-sm"
+                  style={{ cursor: 'pointer', width: '100%', aspectRatio: '16 / 9', objectFit: 'cover' }}
+                // onClick={() => openModal({
+                //   title: 'Smart Residence — Contemporary 3 BHK',
+                //   img: Img1,
+                //   description: 'Contemporary 3 BHK with smart lighting and security, inverter backup, modular kitchen, and thoughtfully planned storage solutions.',
+                //   status: 'Completed'
+                // })}
                 />
                 <div className="project-overlay">
-                  <h4>Modern Home</h4>
-                  <p>Contemporary design with smart home features</p>
+                  <h4 className="h5 fw-semibold mb-1">Smart Residence</h4>
+                  <p className="small mb-0">Contemporary 3 BHK with Smart Features</p>
                 </div>
               </div>
             </div>
@@ -288,75 +345,43 @@ export default function Projects() {
         </div>
       </section>
 
-      <footer className="footer">
+      {/* Alternating feature rows */}
+      <section className="section" style={{ background: 'var(--light-bg)' }}>
         <div className="container">
-          <div className="row">
-            <div className="col-lg-4 mb-4">
-              <img src={FooterLogo} alt="Sri Ankura Developers" className="footer-logo" />
-              <p>
-                Sri Ankura Developers is your trusted partner for quality construction services. We bring your vision to
-                life with precision, innovation, and dedication to excellence.
-              </p>
-              <div className="social-links">
-                <a href="#" aria-label="Facebook">
-                  <i className="fab fa-facebook-f" />
-                </a>
-                <a href="#" aria-label="Twitter">
-                  <i className="fab fa-twitter" />
-                </a>
-                <a href="#" aria-label="Instagram">
-                  <i className="fab fa-instagram" />
-                </a>
-                <a href="#" aria-label="LinkedIn">
-                  <i className="fab fa-linkedin-in" />
-                </a>
-              </div>
+          <div className="row align-items-center g-4 mb-4">
+            <div className="col-lg-6">
+              <img src={Img1} alt="Ankura Homes — Exterior view" className="img-fluid rounded shadow-sm" />
             </div>
-
-            <div className="col-lg-2 col-md-6 mb-4">
-              <h5>Quick Links</h5>
-              <ul className="footer-links">
-                <li>
-                  <a href="#/">Home</a>
-                </li>
-                <li>
-                  <a href="#/about">About Us</a>
-                </li>
-                <li>
-                  <a href="#/projects">Projects</a>
-                </li>
-                <li>
-                  <a href="#/contact">Contact</a>
-                </li>
+            <div className="col-lg-6">
+              <h3 className="mb-2">Ankura Homes</h3>
+              <p className="mb-2 text-muted">2 BHK Luxury Apartments @ Hayathnagar</p>
+              <ul className="list-unstyled small mb-0">
+                <li className="mb-1">• Modern amenities with premium finishes</li>
+                <li className="mb-1">• Dedicated car parking and secure premises</li>
+                <li className="mb-1">• Excellent connectivity and prime neighborhood</li>
               </ul>
             </div>
+          </div>
 
-            <div className="col-lg-3 col-md-6 mb-4">
-              <h5>Contact Info</h5>
-              <p>
-                <i className="fas fa-map-marker-alt me-2" /> H.No.4-8-110/SN/159, Road No 5,
-                <br /> Suryanagar Colony,
-                <br /> Hayath Nagar,
-                <br /> Hyderabad – 501505
-              </p>
-              <p>
-                <i className="fas fa-phone me-2" /> +91 9696239999
-                <br />
-                <i className="fas fa-phone me-2" /> +91 8801969696
-                <br />
-                <i className="fas fa-phone me-2" /> +91 8688916999
-              </p>
-              <p>
-                <i className="fas fa-envelope me-2" /> sriankuradevelopers@gmail.com
-              </p>
+          <div className="row align-items-center g-4">
+            <div className="col-lg-6 order-lg-2">
+              <img src={Img2} alt="Premium Residence — Facade" className="img-fluid rounded shadow-sm" />
+            </div>
+            <div className="col-lg-6 order-lg-1">
+              <h3 className="mb-2">Premium Residence</h3>
+              <p className="mb-2 text-muted">4 BHK Independent Villa · Hayathnagar</p>
+              <ul className="list-unstyled small mb-0">
+                <li className="mb-1">• Double‑height living with Vaastu‑aligned planning</li>
+                <li className="mb-1">• Premium materials and meticulous detailing</li>
+                <li className="mb-1">• Private parking and landscaped surroundings</li>
+              </ul>
             </div>
           </div>
-
-          <div className="footer-bottom">
-            <p>&copy; 2026 Sri Ankura Developers. All Rights Reserved. Designed with excellence.</p>
-          </div>
         </div>
-      </footer>
+      </section>
+
+      <Footer />
+      <FloatingWhatsApp />
     </>
   );
 }

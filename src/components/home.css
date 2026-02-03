@@ -1,3 +1,14 @@
+/* Make the social circle heading link appear as normal black text */
+.wa-text-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.wa-text-link:hover {
+  color: inherit;
+  text-decoration: underline;
+}
+
 @import '../theme.css';
 
 * {
@@ -177,7 +188,7 @@ body {
   /* background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(44, 62, 80, 0.7)),
     url('../images/home-page-image.jpg') center/cover no-repeat; */
   background: linear-gradient(rgba(44, 62, 80, 0.5), rgba(44, 62, 80, 0.5)),
-    url('../images/home-page-image.jpg') center/cover no-repeat;
+    url('../images/new-home-page.jpeg') center/cover no-repeat;
   z-index: -1;
 }
 
@@ -646,7 +657,7 @@ body {
   background: var(--white);
   border-radius: 50%;
   width: 100%;
-  max-width: 300px;
+  max-width: 360px;
   aspect-ratio: 1/1;
   margin: 0 auto;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
@@ -654,7 +665,7 @@ body {
   align-items: center;
   justify-content: center;
   color: var(--secondary-dark);
-  --orbit: 120px;
+  --orbit: 150px;
 }
 
 .social-circle h5 {
@@ -679,8 +690,8 @@ body {
 
 .social-badge {
   position: absolute;
-  width: 56px;
-  height: 56px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   background: var(--white);
   display: flex;
@@ -703,7 +714,7 @@ body {
 }
 
 .social-badge i {
-  font-size: 22px;
+  font-size: 24px;
   line-height: 1;
   color: var(--secondary-dark);
 }
@@ -786,6 +797,40 @@ body {
   color: #ffffff;
 }
 
+/* Visible WhatsApp annotation label */
+.social-badge.wa .wa-annotation {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translate(8px, -50%);
+  background: var(--primary-color, #25D366);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+}
+
+.social-badge.wa:hover .wa-annotation {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(10px, -50%);
+}
+
+@media (max-width: 576px) {
+  .social-badge.wa .wa-annotation {
+    font-size: 11px;
+    padding: 3px 8px;
+    transform: translate(6px, -50%);
+  }
+}
+
 .contact-card {
   background: var(--white);
   border-radius: 16px;
@@ -857,7 +902,7 @@ body {
 
 @media (max-width: 991px) {
   .social-circle {
-    max-width: 260px;
+    max-width: 300px;
   }
 
   .contact-info-section .row {

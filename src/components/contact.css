@@ -1,3 +1,68 @@
+/* WhatsApp CTA block */
+.whatsapp-cta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+  background: var(--white);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.wa-icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(37, 211, 102, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #25D366;
+  font-size: 22px;
+}
+
+.wa-text .wa-title {
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+
+.wa-text .wa-sub {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.wa-link {
+  margin-top: 4px;
+  display: inline-block;
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+/* WhatsApp numbers: neutral by default, turn blue on hover */
+.wa-number {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.wa-number:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+@media (max-width: 576px) {
+  .whatsapp-cta {
+    padding: 12px 14px;
+  }
+
+  .wa-icon-circle {
+    width: 42px;
+    height: 42px;
+    font-size: 20px;
+  }
+}
+
 /* Import theme variables */
 @import '../theme.css';
 

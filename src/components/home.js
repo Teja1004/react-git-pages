@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import Logo from '../images/Ankura_dev_edited1.png';
-import FooterLogo from '../images/ankura_black-bg.png';
+import Header from './Header';
+import Footer from './Footer';
 import './home.css';
 import EMAILJS from '../config/emailjs';
 import Img1 from '../images/home-page-workers.jpg';
 import Img2 from '../images/h1.jpeg';
 import Img3 from '../images/h2.jpeg';
 import Img4 from '../images/h3.jpeg';
-import Img5 from '../images/building1.jpg';
 import Img6 from '../images/villa.png'
 import Img7 from '../images/interior.jpg'
-import Img8 from '../images/office1.jpeg'
-import Img9 from '../images/office2.jpeg'
 import Img10 from '../images/commercial-building.jpg'
 import Img11 from '../images/google.png'
 import Img12 from '../images/googlename.png'
+import FloatingWhatsApp from './FloatingWhatsApp'
 
 export default function Home() {
+  const WA_NUMBER = '919696239999';
   useEffect(() => {
     const handleScroll = () => {
       const navbar = document.querySelector('.navbar');
@@ -64,6 +63,8 @@ export default function Home() {
 
   // Social circle hover text
   const [socialText, setSocialText] = useState('Connect with WhatsApp');
+
+
 
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
@@ -167,52 +168,13 @@ export default function Home() {
   const handlePrev = () => setReviewIndex(prev => (prev <= 0 ? maxIndex : prev - 1));
   const handleNext = () => setReviewIndex(prev => (prev >= maxIndex ? 0 : prev + 1));
 
+  const goToProjectDetail = (id) => {
+    window.location.hash = `#/projects?detail=${id}`;
+  };
+
   return (
     <>
-      <nav className="navbar navbar-expand-lg">
-        <div className="container">
-          <a className="navbar-brand" href="#/">
-            <img src={Logo} alt="Sri Ankura Developers" style={{ height: '56px' }} />
-            <span className="brand-text">Sri Ankura Developers</span>
-          </a>
-
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
-
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <a className="nav-link active" href="#/">
-                  Home
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#/about">
-                  About Us
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#/projects">Projects</a>
-              </li>
-
-              <li className="nav-item">
-                <a className="nav-link" href="#/contact">
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+      <Header active="home" />
 
       <section className="hero-section">
         <div className="hero-background" />
@@ -236,6 +198,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+
 
       <section className="section about-preview" id="about">
         <div className="container">
@@ -382,14 +346,14 @@ export default function Home() {
           </div>
           <div className="row">
             <div className="col-lg-4 col-md-6 mb-4">
-              <div className="project-card" onClick={() => (window.location.hash = '#/projects')}>
+              <div className="project-card" onClick={() => goToProjectDetail('2')}>
                 <img
                   src={Img2}
                   alt="Luxury Villa Project"
                 />
                 <div className="project-card-body">
-                  <h4>Premium Residence</h4>
-                  <p>Modern luxury villa featuring contemporary design and premium amenities in prime location.</p>
+                  <h4>Ankura Homes</h4>
+                  <p>2 BHK Luxury Apartments @ Hayathnagar</p>
                   <a href="#/projects" className="project-link">
                     View Details <i className="fas fa-arrow-right" />
                   </a>
@@ -650,13 +614,22 @@ export default function Home() {
             {/* Left: Social connect circle */}
             <div className="col-lg-6 social-col">
               <div className="social-circle">
-                <h5>{socialText}</h5>
+                <h5>
+                  <a
+                    className="wa-text-link"
+                    href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hi Sri Ankura Developers, I am interested in your construction services. Could you please provide more information?')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {socialText}
+                  </a>
+                </h5>
                 <a
                   className="social-badge fb"
                   href="#"
                   aria-label="Facebook"
                   onMouseEnter={() => setSocialText('Connect with Facebook')}
-                  onMouseLeave={() => setSocialText('Connect with Us')}
+                  onMouseLeave={() => setSocialText('Connect with WhatsApp')}
                 >
                   <i className="fab fa-facebook-f" />
                 </a>
@@ -665,25 +638,28 @@ export default function Home() {
                   href="#"
                   aria-label="YouTube"
                   onMouseEnter={() => setSocialText('Connect with YouTube')}
-                  onMouseLeave={() => setSocialText('Connect with Us')}
+                  onMouseLeave={() => setSocialText('Connect with WhatsApp')}
                 >
                   <i className="fab fa-youtube" />
                 </a>
                 <a
                   className="social-badge wa"
-                  href="#"
+                  href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hi Sri Ankura Developers, I am interested in your construction services. Could you please provide more information?')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label="WhatsApp"
                   onMouseEnter={() => setSocialText('Connect with WhatsApp')}
-                  onMouseLeave={() => setSocialText('Connect with Us')}
+                  onMouseLeave={() => setSocialText('Connect with WhatsApp')}
                 >
                   <i className="fab fa-whatsapp" />
+                  <span className="wa-annotation">WhatsApp</span>
                 </a>
                 <a
                   className="social-badge ig"
                   href="#"
                   aria-label="Instagram"
                   onMouseEnter={() => setSocialText('Connect with Instagram')}
-                  onMouseLeave={() => setSocialText('Connect with Us')}
+                  onMouseLeave={() => setSocialText('Connect with WhatsApp')}
                 >
                   <i className="fab fa-instagram" />
                 </a>
@@ -692,7 +668,7 @@ export default function Home() {
                   href="#"
                   aria-label="LinkedIn"
                   onMouseEnter={() => setSocialText('Connect with LinkedIn')}
-                  onMouseLeave={() => setSocialText('Connect with Us')}
+                  onMouseLeave={() => setSocialText('Connect with WhatsApp')}
                 >
                   <i className="fab fa-linkedin-in" />
                 </a>
@@ -763,76 +739,8 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="footer">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-4 mb-4">
-              <img
-                src={FooterLogo}
-                alt="Sri Ankura Developers"
-                className="footer-logo"
-              />
-              <p>
-                Sri Ankura Developers is your trusted partner for quality construction services. We bring your vision to
-                life with precision, innovation, and dedication to excellence.
-              </p>
-              <div className="social-links">
-                <a href="#" aria-label="Facebook">
-                  <i className="fab fa-facebook-f" />
-                </a>
-                <a href="#" aria-label="Twitter">
-                  <i className="fab fa-twitter" />
-                </a>
-                <a href="#" aria-label="Instagram">
-                  <i className="fab fa-instagram" />
-                </a>
-                <a href="#" aria-label="LinkedIn">
-                  <i className="fab fa-linkedin-in" />
-                </a>
-              </div>
-            </div>
-            <div className="col-lg-2 col-md-6 mb-4">
-              <h5>Quick Links</h5>
-              <ul className="footer-links">
-                <li>
-                  <a href="#/">Home</a>
-                </li>
-                <li>
-                  <a href="#/about">About Us</a>
-                </li>
-                <li>
-                  <a href="#/projects">Projects</a>
-                </li>
-                <li>
-                  <a href="#/contact">Contact</a>
-                </li>
-              </ul>
-            </div>
-            <div className="col-lg-3 col-md-6 mb-4">
-              <h5>Contact Info</h5>
-              <p>
-                <i className="fas fa-map-marker-alt me-2" /> H.No.4-8-110/SN/159, Road No 5,
-                <br /> Suryanagar Colony,
-                <br /> Hayath Nagar,
-                <br /> Hyderabad – 501505
-              </p>
-              <p>
-                <i className="fas fa-phone me-2" /> +91 9696239999
-                <br />
-                <i className="fas fa-phone me-2" /> +91 8801969696
-                <br />
-                <i className="fas fa-phone me-2" /> +91 8688916999
-              </p>
-              <p>
-                <i className="fas fa-envelope me-2" /> sriankuradevelopers@gmail.com
-              </p>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <p>&copy; 2026 Sri Ankura Developers. All Rights Reserved. Designed with excellence.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
+      <FloatingWhatsApp />
     </>
   );
 }

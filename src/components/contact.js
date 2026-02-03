@@ -3,6 +3,9 @@ import './contact.css';
 import Logo from '../images/Ankura_dev_edited1.png';
 import FooterLogo from '../images/ankura_black-bg.png';
 import EMAILJS from '../config/emailjs';
+import Footer from './Footer';
+import Header from './Header';
+import FloatingWhatsApp from './FloatingWhatsApp';
 
 export default function Contact() {
 
@@ -94,59 +97,7 @@ export default function Contact() {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg">
-        <div className="container">
-          <a className="navbar-brand" href="#/">
-            <img src={Logo} alt="Sri Ankura Developers" style={{ height: '56px' }} />
-            <span className="brand-text">Sri Ankura Developers</span>
-          </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <a className="nav-link" href="#/">
-                  Home
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#/about">
-                  About Us
-                </a>
-              </li>
-              {/* <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#/projects" id="projectsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Projects
-                </a>
-                <ul className="dropdown-menu" aria-labelledby="projectsDropdown">
-                  <li>
-                    <a className="dropdown-item" href="#/projects">
-                      Construction Projects
-                    </a>
-                  </li>
-                </ul>
-              </li> */}
-              <li className="nav-item">
-                <a className="nav-link" href="#/projects">Projects</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link active" href="#/contact">
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+      <Header active="contact" />
 
       <section className="page-header">
         <div className="container">
@@ -172,7 +123,7 @@ export default function Contact() {
           </div>
 
           <div className="row mb-5">
-            <div className="col-lg-4 col-md-6 mb-4">
+            <div className="col-lg-3 col-md-6 mb-4">
               <div className="contact-info-box">
                 <div className="contact-icon">
                   <i className="fas fa-map-marker-alt" />
@@ -189,7 +140,7 @@ export default function Contact() {
                 </p>
               </div>
             </div>
-            <div className="col-lg-4 col-md-6 mb-4">
+            <div className="col-lg-3 col-md-6 mb-4">
               <div className="contact-info-box">
                 <div className="contact-icon">
                   <i className="fas fa-phone" />
@@ -203,13 +154,11 @@ export default function Contact() {
                   +91 8688916999
                   <br />
                   <br />
-                  Mon - Sat: 9:00 AM - 7:00 PM
-                  <br />
-                  Sunday: Closed
+                  Sun-Sat: 9:00 AM - 9:00 PM
                 </p>
               </div>
             </div>
-            <div className="col-lg-4 col-md-6 mb-4">
+            <div className="col-lg-3 col-md-6 mb-4">
               <div className="contact-info-box">
                 <div className="contact-icon">
                   <i className="fas fa-envelope" />
@@ -222,6 +171,44 @@ export default function Contact() {
                   <br /> */}
                   <br />
                   We'll respond within 24 hours
+                </p>
+              </div>
+            </div>
+            <div className="col-lg-3 col-md-6 mb-4">
+              <div className="contact-info-box">
+                <div className="contact-icon">
+                  <i className="fab fa-whatsapp" />
+                </div>
+                <h4>WhatsApp Us</h4>
+                <p>
+                  <a
+                    href={`https://wa.me/919696239999?text=${encodeURIComponent('Hi Sri Ankura Developers, I would like to know more about your construction services.')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="wa-number"
+                  >
+                    +91 9696239999
+                  </a>
+                  <br />
+                  <a
+                    href={`https://wa.me/918801969696?text=${encodeURIComponent('Hi Sri Ankura Developers, I would like to know more about your construction services.')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="wa-number"
+                  >
+                    +91 8801969696
+                  </a>
+                  <br />
+                  <a
+                    href={`https://wa.me/918688916999?text=${encodeURIComponent('Hi Sri Ankura Developers, I would like to know more about your construction services.')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="wa-number"
+                  >
+                    +91 8688916999
+                  </a>
+                  <br />
+                  <span style={{ color: '#6b7280' }}>Sun-Sat: 9:00 AM - 9:00 PM</span>
                 </p>
               </div>
             </div>
@@ -283,81 +270,8 @@ export default function Contact() {
         </div>
       </section>
 
-      <footer className="footer">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-4 mb-4">
-              <img
-                src={FooterLogo}
-                alt="Sri Ankura Developers"
-                className="footer-logo"
-              />
-              <p>
-                Sri Ankura Developers is your trusted partner for quality construction services. We bring your vision to
-                life with precision, innovation, and dedication to excellence.
-              </p>
-              <div className="social-links">
-                <a href="#" aria-label="Facebook">
-                  <i className="fab fa-facebook-f" />
-                </a>
-                <a href="#" aria-label="Twitter">
-                  <i className="fab fa-twitter" />
-                </a>
-                <a href="#" aria-label="Instagram">
-                  <i className="fab fa-instagram" />
-                </a>
-                <a href="#" aria-label="LinkedIn">
-                  <i className="fab fa-linkedin-in" />
-                </a>
-              </div>
-            </div>
-
-            <div className="col-lg-2 col-md-6 mb-4">
-              <h5>Quick Links</h5>
-              <ul className="footer-links">
-                <li>
-                  <a href="#/">Home</a>
-                </li>
-                <li>
-                  <a href="#/about">About Us</a>
-                </li>
-                <li>
-                  <a href="#/projects">Projects</a>
-                </li>
-                <li>
-                  <a href="#/contact">Contact</a>
-                </li>
-              </ul>
-            </div>
-
-
-
-            <div className="col-lg-3 col-md-6 mb-4">
-              <h5>Contact Info</h5>
-              <p>
-                <i className="fas fa-map-marker-alt me-2" /> H.No.4-8-110/SN/159, Road No 5,
-                <br /> Suryanagar Colony,
-                <br /> Hayath Nagar,
-                <br /> Hyderabad – 501505
-              </p>
-              <p>
-                <i className="fas fa-phone me-2" /> +91 9696239999
-                <br />
-                <i className="fas fa-phone me-2" /> +91 8801969696
-                <br />
-                <i className="fas fa-phone me-2" /> +91 8688916999
-              </p>
-              <p>
-                <i className="fas fa-envelope me-2" /> sriankuradevelopers@gmail.com
-              </p>
-            </div>
-          </div>
-
-          <div className="footer-bottom">
-            <p>&copy; 2026 Sri Ankura Developers. All Rights Reserved. Designed with excellence.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
+      <FloatingWhatsApp />
     </>
   );
 }
