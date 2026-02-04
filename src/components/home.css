@@ -1104,3 +1104,12 @@ body {
     margin-top: 10px;
   }
 }
+
+/* Use a dedicated mobile hero background image on small screens */
+@media (max-width: 576px) {
+  .hero-background {
+    /* Keep the same gradient but swap the image for mobile */
+    background: linear-gradient(rgba(44, 62, 80, 0.5), rgba(44, 62, 80, 0.5)),
+      url('../images/mobile-home3.avif') center/cover no-repeat;
+  }
+}

@@ -318,7 +318,7 @@ export default function Home() {
             </div>
             <div className="col-lg-3 col-md-6 mb-4 mb-lg-0">
               <div className="stat-item">
-                <div className="stat-number">50+</div>
+                <div className="stat-number">150+</div>
                 <div className="stat-label">Happy Clients</div>
               </div>
             </div>
