@@ -1,8 +1,9 @@
 {
   "files": {
-    "main.css": "/react-git-pages/static/css/main.ebfeb853.css",
-    "main.js": "/react-git-pages/static/js/main.e5b380cc.js",
+    "main.css": "/react-git-pages/static/css/main.b4ed1df7.css",
+    "main.js": "/react-git-pages/static/js/main.c919e831.js",
     "static/js/453.44923978.chunk.js": "/react-git-pages/static/js/453.44923978.chunk.js",
+    "static/media/mobile-home3.avif": "/react-git-pages/static/media/mobile-home3.4d0d56625a6f3f650fb3.avif",
     "static/media/interior1.png": "/react-git-pages/static/media/interior1.b77f5087de12ad47fc24.png",
     "static/media/villa.png": "/react-git-pages/static/media/villa.258333c5818a5c76ecd4.png",
     "static/media/new-home-page.jpeg": "/react-git-pages/static/media/new-home-page.853f294262b9a6fef8ef.jpeg",
@@ -25,12 +26,12 @@
     "static/media/ankura_black-bg.png": "/react-git-pages/static/media/ankura_black-bg.b018fbcd729d2baa0430.png",
     "static/media/Ankura_dev_edited1.png": "/react-git-pages/static/media/Ankura_dev_edited1.cb624ea4b8d326c785bb.png",
     "index.html": "/react-git-pages/index.html",
-    "main.ebfeb853.css.map": "/react-git-pages/static/css/main.ebfeb853.css.map",
-    "main.e5b380cc.js.map": "/react-git-pages/static/js/main.e5b380cc.js.map",
+    "main.b4ed1df7.css.map": "/react-git-pages/static/css/main.b4ed1df7.css.map",
+    "main.c919e831.js.map": "/react-git-pages/static/js/main.c919e831.js.map",
     "453.44923978.chunk.js.map": "/react-git-pages/static/js/453.44923978.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ebfeb853.css",
-    "static/js/main.e5b380cc.js"
+    "static/css/main.b4ed1df7.css",
+    "static/js/main.c919e831.js"
   ]
 }
