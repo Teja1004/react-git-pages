@@ -134,7 +134,8 @@ body {
 
 .page-header {
   background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)),
-    url('../images/project.jpg') center/cover;
+    /* url('../images/project.jpg') center/cover; */
+    url('../images/enclave-header.png') center/cover;
   padding: 150px 0 100px;
   margin-top: 70px;
   color: var(--white);
@@ -329,4 +330,32 @@ body {
   .section-title {
     font-size: 2rem;
   }
+}
+
+/* small cards */
+/* Text-only cards: compact spacing */
+.project-card {
+  padding: 16px;
+  /* p-3 maps to ~16px if not using Bootstrap utilities */
+}
+
+.project-card .project-details {
+  position: static;
+  display: inline-block;
+  font-size: 12px;
+  padding: 2px 8px;
+  margin-bottom: 8px;
+}
+
+/* Reduce heading and paragraph spacing */
+.project-card h4 {
+  margin: 0 0 6px;
+}
+
+.project-card p {
+  margin-bottom: 6px;
+}
+
+.project-card p:last-child {
+  margin-bottom: 0;
 }

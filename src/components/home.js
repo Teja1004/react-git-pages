@@ -6,7 +6,7 @@ import EMAILJS from '../config/emailjs';
 import Img1 from '../images/home-page-workers.jpg';
 import Img2 from '../images/h1.jpeg';
 import Img3 from '../images/h2.jpeg';
-import Img4 from '../images/h3.jpeg';
+import Img4 from '../images/Ankura-enclave4.jpeg';
 import Img6 from '../images/villa.png'
 import Img7 from '../images/interior.jpg'
 import Img10 from '../images/commercial-building.jpg'
@@ -354,37 +354,40 @@ export default function Home() {
                 <div className="project-card-body">
                   <h4>Ankura Homes</h4>
                   <p>2 BHK Luxury Apartments @ Hayathnagar</p>
-                  <a href="#/projects" className="project-link">
+                  <p>Modern amenities and enhanced privacy with no common walls.</p>
+                  <a href="#/projects?detail=2" className="project-link">
                     View Details <i className="fas fa-arrow-right" />
                   </a>
                 </div>
               </div>
             </div>
             <div className="col-lg-4 col-md-6 mb-4">
-              <div className="project-card" onClick={() => (window.location.hash = '#/projects')}>
+              <div className="project-card" onClick={() => goToProjectDetail('1')}>
                 <img
                   src={Img3}
                   alt="Commercial Complex"
                 />
                 <div className="project-card-body">
-                  <h4>Commercial Complex</h4>
-                  <p>State-of-the-art commercial complex designed for modern businesses with sustainable features.</p>
-                  <a href="#/projects" className="project-link">
+                  <h4>Ankura Pride</h4>
+                  <p>4 BHK Independent Villa · Hayathnagar</p>
+                  <p>Double‑height living with Vaastu‑aligned planning.</p>
+                  <a href="#/projects?detail=1" className="project-link">
                     View Details <i className="fas fa-arrow-right" />
                   </a>
                 </div>
               </div>
             </div>
             <div className="col-lg-4 col-md-6 mb-4">
-              <div className="project-card" onClick={() => (window.location.hash = '#/projects')}>
+              <div className="project-card" onClick={() => goToProjectDetail('3')}>
                 <img
                   src={Img4}
                   alt="Apartment Building"
                 />
                 <div className="project-card-body">
-                  <h4>Apartment Building</h4>
-                  <p>Modern residential apartment complex with world-class amenities and sustainable design.</p>
-                  <a href="#/projects" className="project-link">
+                  <h4>Ankura Enclave</h4>
+                  <p>Custom 3 BHK Residence</p>
+                  <p>Excellent cross‑ventilation and efficient space planning.</p>
+                  <a href="#/projects?detail=3" className="project-link">
                     View Details <i className="fas fa-arrow-right" />
                   </a>
                 </div>
