@@ -1,9 +1,9 @@
 
 import React from 'react';
-import Home from './components/home';
-import AboutUs from './components/aboutUs';
-import Projects from './components/projects';
-import Contact from './components/contact';
+import Home from './components/home/home';
+import AboutUs from './components/aboutUs/aboutUs';
+import Projects from './components/project/projects';
+import Contact from './components/contact/contact';
 
 function App() {
   const [hash, setHash] = React.useState(() => window.location.hash || '#/');
